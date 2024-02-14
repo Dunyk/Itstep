@@ -11,5 +11,12 @@
     "lastName": "lastName-1",
     "login": "login-1",
     "password": "password-1"
+  },
+  {
+    "firstName": "f1",
+    "lastName": "l1",
+    "login": "l2",
+    "password": "p1",
+    "token": "39be7c8e-aac7-4a76-a27b-fae0137fb7dc"
   }
 ]

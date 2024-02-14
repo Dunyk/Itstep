@@ -1,7 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import crypto from "crypto"
 import { USERS, ORDERS } from './db.js';
 import { authorizationMiddleware } from './middlewares.js';
+import { stringify } from 'querystring';
 
 const app = express();
 
@@ -63,7 +65,8 @@ app.post('/orders', authorizationMiddleware, (req, res) => {
 
  const order = {
   ...body,
-  login: user.login
+  login: user.login,
+  price: Math.floor(Math.random() * 100) + 20,
  };
 
  ORDERS.push(order);
@@ -80,3 +83,14 @@ app.get('/orders', authorizationMiddleware, (req, res) => {
 });
 
 app.listen(8080, () => console.log('Server was started'));
+
+app.get('/address/from/last-5', authorizationMiddleware, (req, res) => {
+  const { user } = req;
+ 
+  const orders = ORDERS.filter(el => el.login === user.login);
+ 
+  return res.status(200).send(orders);
+  
+
+  
+ });
